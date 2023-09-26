@@ -1,11 +1,11 @@
+import os
+from dotenv import load_dotenv
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-SECRET_KEY = (
-    'django-insecure-uaftmh$huck)afofd#loia&iyb=+sm7=g4(hb$c4!fys2%y+4l'
-)
+load_dotenv()
+SECRET_KEY = os.getenv('SECRET_KEY', default='SUP3R-S3CR3T-K3Y-F0R-MY-PR0J3CT')
 
 DEBUG = True
 
@@ -56,8 +56,12 @@ WSGI_APPLICATION = 'parser.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('DB_NAME', 'db_name'),
+        'USER': os.getenv('DB_USER', 'db_user'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'db_password'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '3306'),
     }
 }
 
@@ -78,7 +82,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -87,6 +91,7 @@ USE_I18N = True
 USE_TZ = True
 
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = 'static/'
 
 
