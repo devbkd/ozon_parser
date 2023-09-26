@@ -1,0 +1,10 @@
+[tool.black]
+line-length = 80
+skip-string-normalization = true
+extend-exclude = 'tests|migrations'
+
+[tool.isort]
+profile = "black"
+line_length = 80
+src_paths = ["parser"]
+extend_skip = ["tests", "migrations"]
